@@ -3,55 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health & Wellness Blog - fitmeagain</title>
+  <title>Health Blog - fitmeagain</title>
   <meta name="description" content="Expert articles on heart health, liver, joints, bones, muscle building, strength training, exercise, cardio, nutrition, mental health, respiratory, and running.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
     body { background: #f5f9fc; color: #1e2f3e; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     
-    /* Navigation */
     .navbar {
-      background: white; border-bottom: 2px solid #d0deeb; padding: 10px 0; position: sticky; top: 0; z-index: 100;
+      background: white; border-bottom: 2px solid #d0deeb; padding: 10px 0;
     }
     .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
     .logo-text { font-size: 2rem; font-weight: 700; color: #1a3f66; }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav-links a {
       text-decoration: none; color: #2b4b6e; font-weight: 600; padding: 8px 16px; border-radius: 30px;
-      background: #ecf3fa; font-size: 0.95rem; transition: 0.2s;
+      background: #ecf3fa; font-size: 0.95rem;
     }
     .nav-links a:hover { background: #d3e4f2; }
     .nav-links a.active { background: #1b7e55; color: white; }
     
-    /* Page Header */
-    .page-header { margin: 40px 0 20px; }
-    h1 { font-size: 2.5rem; color: #113d5c; border-left: 8px solid #1b7e55; padding-left: 25px; }
-    .subhead { color: #2b4b6e; font-size: 1.2rem; margin: 15px 0 30px; }
+    h1 { font-size: 2.5rem; color: #113d5c; border-left: 8px solid #1b7e55; padding-left: 25px; margin: 40px 0; }
     
-    /* Categories Grid */
     .categories-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin: 40px 0;
     }
     .category-card {
       background: white; border-radius: 20px; padding: 30px; text-align: center;
-      border: 1px solid #d0e2f0; transition: transform 0.2s; text-decoration: none; color: inherit;
-      display: block;
+      border: 1px solid #d0e2f0; text-decoration: none; color: inherit; display: block;
     }
-    .category-card:hover {
-      transform: translateY(-5px); box-shadow: 0 15px 30px rgba(27,126,85,0.1);
-      border-color: #1b7e55;
-    }
+    .category-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(27,126,85,0.1); }
     .category-icon { font-size: 3rem; color: #1b7e55; margin-bottom: 15px; }
-    .category-title { font-size: 1.5rem; font-weight: 600; color: #1a3f66; margin-bottom: 10px; }
-    .category-desc { color: #5b6f82; font-size: 0.95rem; line-height: 1.5; }
+    .category-title { font-size: 1.5rem; font-weight: 600; color: #1a3f66; }
     
-    /* Footer */
     footer {
       background: #e2eefa; border-radius: 40px 40px 0 0; padding: 30px; margin-top: 50px; text-align: center;
     }
-    .footer-text { font-size: 1.5rem; font-weight: 700; color: #1a3f66; margin-bottom: 15px; }
   </style>
 </head>
 <body>
@@ -59,104 +47,66 @@
     <div class="container nav-flex">
       <div class="logo-text">fitmeagain</div>
       <div class="nav-links">
-        <a href="../ideal-weight.html">Ideal Weight</a>
+        <a href="../index.html">Ideal Weight</a>
         <a href="../bmi.html">BMI</a>
         <a href="../body-fat.html">Body Fat</a>
         <a href="../calorie.html">Calorie</a>
-        <a href="blog.html" class="active">Blog</a>
+        <a href="index.html" class="active">Blog</a>
       </div>
     </div>
   </nav>
 
   <main class="container">
-    <div class="page-header">
-      <h1>Health & Wellness Blog</h1>
-      <div class="subhead">Browse articles by category</div>
-    </div>
-
+    <h1>Health & Wellness Blog</h1>
+    
     <div class="categories-grid">
-      <!-- 1. Heart Health -->
       <a href="heart.html" class="category-card">
         <div class="category-icon"><i class="fas fa-heart"></i></div>
         <div class="category-title">Heart Health</div>
-        <div class="category-desc">Cardiovascular wellness, heart disease prevention, healthy lifestyle tips</div>
       </a>
-      
-      <!-- 2. Liver Health -->
       <a href="liver.html" class="category-card">
         <div class="category-icon"><i class="fas fa-liver"></i></div>
         <div class="category-title">Liver Health</div>
-        <div class="category-desc">Liver function, detoxification, fatty liver, healthy diet</div>
       </a>
-      
-      <!-- 3. Joints -->
       <a href="joints.html" class="category-card">
         <div class="category-icon"><i class="fas fa-bone"></i></div>
         <div class="category-title">Joint Health</div>
-        <div class="category-desc">Joint pain relief, arthritis, mobility, flexibility exercises</div>
       </a>
-      
-      <!-- 4. Bones -->
       <a href="bones.html" class="category-card">
         <div class="category-icon"><i class="fas fa-bone"></i></div>
         <div class="category-title">Bone Health</div>
-        <div class="category-desc">Bone density, osteoporosis, calcium, vitamin D, strength</div>
       </a>
-      
-      <!-- 5. Muscle Building -->
       <a href="musclebuilding.html" class="category-card">
         <div class="category-icon"><i class="fas fa-dumbbell"></i></div>
         <div class="category-title">Muscle Building</div>
-        <div class="category-desc">Hypertrophy, protein intake, workout plans, recovery</div>
       </a>
-      
-      <!-- 6. Strength Training -->
       <a href="strength-training.html" class="category-card">
         <div class="category-icon"><i class="fas fa-person-lifting"></i></div>
         <div class="category-title">Strength Training</div>
-        <div class="category-desc">Weight lifting, progressive overload, form, programming</div>
       </a>
-      
-      <!-- 7. Exercise -->
       <a href="exercise.html" class="category-card">
         <div class="category-icon"><i class="fas fa-person-walking"></i></div>
         <div class="category-title">Exercise</div>
-        <div class="category-desc">General fitness, home workouts, routines for all levels</div>
       </a>
-      
-      <!-- 8. Cardio -->
       <a href="cardio.html" class="category-card">
         <div class="category-icon"><i class="fas fa-heart-pulse"></i></div>
         <div class="category-title">Cardio</div>
-        <div class="category-desc">Running, cycling, HIIT, endurance, heart health</div>
       </a>
-      
-      <!-- 9. Nutrition -->
       <a href="nutrition.html" class="category-card">
         <div class="category-icon"><i class="fas fa-apple-alt"></i></div>
         <div class="category-title">Nutrition</div>
-        <div class="category-desc">Healthy eating, meal planning, macros, supplements</div>
       </a>
-      
-      <!-- 10. Mental Health -->
       <a href="mentalhealth.html" class="category-card">
         <div class="category-icon"><i class="fas fa-brain"></i></div>
         <div class="category-title">Mental Health</div>
-        <div class="category-desc">Stress management, mindfulness, sleep, well-being</div>
       </a>
-      
-      <!-- 11. Respiratory -->
       <a href="respiratory.html" class="category-card">
         <div class="category-icon"><i class="fas fa-lungs"></i></div>
-        <div class="category-title">Respiratory Health</div>
-        <div class="category-desc">Lung health, breathing exercises, asthma, COPD</div>
+        <div class="category-title">Respiratory</div>
       </a>
-      
-      <!-- 12. Running -->
       <a href="running.html" class="category-card">
         <div class="category-icon"><i class="fas fa-shoe-prints"></i></div>
         <div class="category-title">Running</div>
-        <div class="category-desc">Training tips, injury prevention, marathon prep, gear</div>
       </a>
     </div>
   </main>
@@ -164,8 +114,7 @@
   <footer>
     <div class="container">
       <div class="footer-text">fitmeagain</div>
-      <p>Evidence-based health tools and wellness resources</p>
-      <p><i class="fas fa-copyright"></i> 2026 fitmeagain</p>
+      <p>Evidence-based health tools</p>
     </div>
   </footer>
 </body>
