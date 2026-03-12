@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator - Body Mass Index - fitmeagain</title>
+  <meta name="description" content="Calculate your BMI (Body Mass Index) and see categories: Underweight, Normal, Overweight, Obesity. Free health tool.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+    body { background: #f5f9fc; color: #1e2f3e; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    .navbar {
+      background: white; border-bottom: 2px solid #d0deeb; padding: 10px 0; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo-text { font-size: 2rem; font-weight: 700; color: #1a3f66; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a {
+      text-decoration: none; color: #2b4b6e; font-weight: 600; padding: 8px 16px; border-radius: 30px;
+      background: #ecf3fa; font-size: 0.95rem; transition: 0.2s;
+    }
+    .nav-links a:hover { background: #d3e4f2; }
+    .nav-links a.active { background: #1b7e55; color: white; }
+    
+    .page-header { margin: 30px 0 20px; }
+    h1 { font-size: 2.4rem; color: #113d5c; margin-bottom: 10px; }
+    .subhead { color: #2b4b6e; font-size: 1.1rem; border-left: 4px solid #1b7e55; padding-left: 20px; }
+    
+    .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+    @media (max-width:700px){ .calc-wrapper { grid-template-columns:1fr; } }
+    
+    .input-panel, .result-panel {
+      background: white; border-radius: 24px; padding: 32px; box-shadow: 0 12px 30px rgba(0,45,70,0.08);
+      border: 1px solid #cde0ef;
+    }
+    
+    h2 { font-size: 1.8rem; color: #1b4d6e; margin-bottom: 24px; }
+    
+    .input-group { margin-bottom: 22px; }
+    .input-group label { display: block; font-weight: 600; color: #1d4460; margin-bottom: 8px; }
+    .input-group input, .input-group select {
+      width: 100%; padding: 14px 20px; border: 1.5px solid #c2d7ec; border-radius: 60px;
+      font-size: 1rem; background: #f6faff;
+    }
+    .input-group input:focus { border-color: #1b7e55; outline: none; box-shadow: 0 0 0 4px #1b7e5520; }
+    
+    .btn-calc {
+      background: #1b7e55; color: white; border: none; border-radius: 60px; padding: 16px 28px;
+      font-size: 1.2rem; font-weight: 700; width: 100%; cursor: pointer; margin: 15px 0;
+    }
+    .btn-calc:hover { background: #136342; }
+    
+    .result-box {
+      background: #e0f2e9; border-radius: 30px; padding: 25px; font-size: 2.2rem; font-weight: 700;
+      text-align: center; color: #1b5e3a;
+    }
+    .result-box small { font-size: 1rem; font-weight: 400; display: block; color: #266e48; }
+    
+    .category-list { list-style: none; font-size: 1.2rem; }
+    .category-list li { margin: 15px 0; display: flex; align-items: center; gap: 10px; }
+    
+    .info-section {
+      background: #ecf3fa; border-radius: 24px; padding: 32px; margin: 40px 0;
+    }
+    .info-section h3 { font-size: 1.6rem; color: #113d5c; margin: 20px 0 15px; }
+    
+    .blog-teaser {
+      background: white; border-radius: 24px; padding: 40px; text-align: center; margin: 40px 0;
+      border: 2px dashed #b0cce0;
+    }
+    
+    footer {
+      background: #e2eefa; border-radius: 40px 40px 0 0; padding: 30px; margin-top: 50px; text-align: center;
+    }
+    .footer-text { font-size: 1.5rem; font-weight: 700; color: #1a3f66; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-text">fitmeagain</div>
+      <div class="nav-links">
+        <a href="ideal-weight.html">Ideal Weight</a>
+        <a href="bmi.html" class="active">BMI</a>
+        <a href="body-fat.html">Body Fat</a>
+        <a href="calorie.html">Calorie</a>
+        <a href="blog/index.html">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>BMI Calculator</h1>
+      <div class="subhead">Body Mass Index · WHO Classification</div>
+    </div>
+
+    <div class="calc-wrapper">
+      <!-- Input Panel -->
+      <div class="input-panel">
+        <h2>Enter Your Measurements</h2>
+        <div class="input-group">
+          <label>Weight (kg)</label>
+          <input type="number" id="weight" value="74" step="0.1" min="20" max="300">
+        </div>
+        <div class="input-group">
+          <label>Height (cm)</label>
+          <input type="number" id="height" value="175" min="100" max="250">
+        </div>
+        <button class="btn-calc" id="calculateBtn">Calculate BMI</button>
+        
+        <div style="margin-top:30px; font-size:0.9rem; color:#5b6f82;">
+          <p><i class="fas fa-info-circle"></i> You can also enter height in feet and inches:</p>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <select id="feet" style="padding:10px; border-radius:40px; border:1px solid #c2d7ec;">
+              <option value="4">4 ft</option><option value="5" selected>5 ft</option><option value="6">6 ft</option>
+            </select>
+            <select id="inches" style="padding:10px; border-radius:40px; border:1px solid #c2d7ec;">
+              <option value="0">0 in</option><option value="1">1 in</option><option value="2">2 in</option>
+              <option value="3">3 in</option><option value="4">4 in</option><option value="5">5 in</option>
+              <option value="6">6 in</option><option value="7">7 in</option><option value="8">8 in</option>
+              <option value="9">9 in</option><option value="10">10 in</option><option value="11">11 in</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="result-panel">
+        <h2>Your BMI Result</h2>
+        <div class="result-box" id="bmiResult">24.2 <small>normal weight</small></div>
+        
+        <h3 style="margin:30px 0 15px;">BMI Categories</h3>
+        <ul class="category-list">
+          <li><i class="fas fa-circle" style="color:#3498db;"></i> Underweight: < 18.5</li>
+          <li><i class="fas fa-circle" style="color:#2ecc71;"></i> Normal: 18.5 – 24.9</li>
+          <li><i class="fas fa-circle" style="color:#f39c12;"></i> Overweight: 25 – 29.9</li>
+          <li><i class="fas fa-circle" style="color:#e67e22;"></i> Obesity: ≥ 30</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Educational Content -->
+    <div class="info-section">
+      <h2>What is BMI?</h2>
+      <p>Body Mass Index (BMI) is a person's weight in kilograms divided by the square of height in meters. BMI is an inexpensive and easy screening method for weight category—underweight, healthy weight, overweight, and obesity.</p>
+      
+      <h3>How to Calculate BMI</h3>
+      <p>Formula: BMI = weight (kg) / height² (m²)</p>
+      <p>Example: 74 kg / (1.75m)² = 74 / 3.0625 = 24.2</p>
+      
+      <h3>Limitations of BMI</h3>
+      <p>BMI is a useful tool but has limitations. It may overestimate body fat in athletes and people with a muscular build, and underestimate body fat in older adults and those who have lost muscle mass. For a more complete assessment, consider using our Body Fat Calculator alongside BMI.</p>
+      
+      <h3>BMI for Children and Teens</h3>
+      <p>For children and teens, BMI is interpreted using age- and sex-specific percentiles from CDC growth charts. A child's weight status is determined by comparing their BMI to that of other children of the same age and sex.</p>
+    </div>
+
+    <!-- Blog Teaser -->
+    <div class="blog-teaser">
+      <i class="fas fa-blog" style="font-size:3rem; color:#1b7e55; margin-bottom:15px;"></i>
+      <h3 style="font-size:2rem; margin-bottom:10px;">Visit Our Blog</h3>
+      <p style="margin-bottom:20px;">Expert articles on heart health, liver, joints, bones, muscle building, strength training, exercise and more.</p>
+      <a href="blog/index.html" style="background:#1b7e55; color:white; text-decoration:none; padding:12px 30px; border-radius:60px; font-weight:600; display:inline-block;">Browse Categories →</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-text">fitmeagain</div>
+      <p>Evidence-based health tools and wellness resources</p>
+      <p><i class="fas fa-copyright"></i> 2026 fitmeagain</p>
+    </div>
+  </footer>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      let height = parseFloat(document.getElementById('height').value) / 100;
+      
+      // Check if feet/inches are used instead
+      const feet = parseInt(document.getElementById('feet').value);
+      const inches = parseInt(document.getElementById('inches').value);
+      if (feet || inches) {
+        const totalInches = feet * 12 + inches;
+        height = totalInches * 0.0254; // convert to meters
+      }
+      
+      if (weight > 0 && height > 0) {
+        const bmi = weight / (height * height);
+        let category = '';
+        if (bmi < 18.5) category = 'underweight';
+        else if (bmi < 25) category = 'normal weight';
+        else if (bmi < 30) category = 'overweight';
+        else category = 'obesity';
+        
+        document.getElementById('bmiResult').innerHTML = bmi.toFixed(1) + ' <small>' + category + '</small>';
+      }
+    }
+    
+    document.getElementById('calculateBtn').addEventListener('click', calculateBMI);
+    
+    // Sync feet/inches to cm
+    document.getElementById('feet').addEventListener('change', function() {
+      const feet = parseInt(document.getElementById('feet').value);
+      const inches = parseInt(document.getElementById('inches').value);
+      const totalInches = feet * 12 + inches;
+      const cm = totalInches * 2.54;
+      document.getElementById('height').value = Math.round(cm);
+    });
+    
+    document.getElementById('inches').addEventListener('change', function() {
+      const feet = parseInt(document.getElementById('feet').value);
+      const inches = parseInt(document.getElementById('inches').value);
+      const totalInches = feet * 12 + inches;
+      const cm = totalInches * 2.54;
+      document.getElementById('height').value = Math.round(cm);
+    });
+    
+    // Initial calculation
+    calculateBMI();
+  </script>
+</body>
+</html>

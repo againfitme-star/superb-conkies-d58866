@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Fat Calculator - Estimate Body Fat % - fitmeagain</title>
+  <meta name="description" content="Estimate your body fat percentage using the Deurenberg formula based on BMI, age, and gender.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Same styles as bmi.html - copy from above */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+    body { background: #f5f9fc; color: #1e2f3e; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    .navbar {
+      background: white; border-bottom: 2px solid #d0deeb; padding: 10px 0; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo-text { font-size: 2rem; font-weight: 700; color: #1a3f66; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a {
+      text-decoration: none; color: #2b4b6e; font-weight: 600; padding: 8px 16px; border-radius: 30px;
+      background: #ecf3fa; font-size: 0.95rem; transition: 0.2s;
+    }
+    .nav-links a:hover { background: #d3e4f2; }
+    .nav-links a.active { background: #1b7e55; color: white; }
+    
+    .page-header { margin: 30px 0 20px; }
+    h1 { font-size: 2.4rem; color: #113d5c; margin-bottom: 10px; }
+    .subhead { color: #2b4b6e; font-size: 1.1rem; border-left: 4px solid #1b7e55; padding-left: 20px; }
+    
+    .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+    @media (max-width:700px){ .calc-wrapper { grid-template-columns:1fr; } }
+    
+    .input-panel, .result-panel {
+      background: white; border-radius: 24px; padding: 32px; box-shadow: 0 12px 30px rgba(0,45,70,0.08);
+      border: 1px solid #cde0ef;
+    }
+    
+    h2 { font-size: 1.8rem; color: #1b4d6e; margin-bottom: 24px; }
+    
+    .input-group { margin-bottom: 22px; }
+    .input-group label { display: block; font-weight: 600; color: #1d4460; margin-bottom: 8px; }
+    .input-group input, .input-group select {
+      width: 100%; padding: 14px 20px; border: 1.5px solid #c2d7ec; border-radius: 60px;
+      font-size: 1rem; background: #f6faff;
+    }
+    .input-group input:focus { border-color: #1b7e55; outline: none; box-shadow: 0 0 0 4px #1b7e5520; }
+    
+    .btn-calc {
+      background: #1b7e55; color: white; border: none; border-radius: 60px; padding: 16px 28px;
+      font-size: 1.2rem; font-weight: 700; width: 100%; cursor: pointer; margin: 15px 0;
+    }
+    .btn-calc:hover { background: #136342; }
+    
+    .result-box {
+      background: #e0f2e9; border-radius: 30px; padding: 25px; font-size: 2.2rem; font-weight: 700;
+      text-align: center; color: #1b5e3a;
+    }
+    .result-box small { font-size: 1rem; font-weight: 400; display: block; color: #266e48; }
+    
+    .info-section {
+      background: #ecf3fa; border-radius: 24px; padding: 32px; margin: 40px 0;
+    }
+    .info-section h3 { font-size: 1.6rem; color: #113d5c; margin: 20px 0 15px; }
+    
+    .blog-teaser {
+      background: white; border-radius: 24px; padding: 40px; text-align: center; margin: 40px 0;
+      border: 2px dashed #b0cce0;
+    }
+    
+    footer {
+      background: #e2eefa; border-radius: 40px 40px 0 0; padding: 30px; margin-top: 50px; text-align: center;
+    }
+    .footer-text { font-size: 1.5rem; font-weight: 700; color: #1a3f66; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-text">fitmeagain</div>
+      <div class="nav-links">
+        <a href="ideal-weight.html">Ideal Weight</a>
+        <a href="bmi.html">BMI</a>
+        <a href="body-fat.html" class="active">Body Fat</a>
+        <a href="calorie.html">Calorie</a>
+        <a href="blog/index.html">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Body Fat Estimator</h1>
+      <div class="subhead">Estimate body fat percentage using the Deurenberg formula</div>
+    </div>
+
+    <div class="calc-wrapper">
+      <!-- Input Panel -->
+      <div class="input-panel">
+        <h2>Enter Your Details</h2>
+        <div style="display:flex; gap:30px; margin-bottom:20px;">
+          <label><input type="radio" name="gender" value="male" checked> <strong>Male</strong></label>
+          <label><input type="radio" name="gender" value="female"> <strong>Female</strong></label>
+        </div>
+        <div class="input-group">
+          <label>BMI</label>
+          <input type="number" id="bmi" step="0.1" value="24.5" min="10" max="50">
+        </div>
+        <div class="input-group">
+          <label>Age (years)</label>
+          <input type="number" id="age" value="35" min="18" max="100">
+        </div>
+        <button class="btn-calc" id="calculateBtn">Estimate Body Fat</button>
+        
+        <div style="margin-top:20px; font-size:0.9rem; color:#5b6f82;">
+          <p><i class="fas fa-info-circle"></i> Don't know your BMI? Use our <a href="bmi.html">BMI Calculator</a> first.</p>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="result-panel">
+        <h2>Your Estimated Body Fat</h2>
+        <div class="result-box" id="fatResult">21.3% <small>estimated</small></div>
+        
+        <h3 style="margin:30px 0 15px;">About This Estimate</h3>
+        <p>The Deurenberg formula provides a reasonable estimate for most adults:</p>
+        <p style="background:#f0f7ff; padding:15px; border-radius:20px; margin-top:15px;">
+          <strong>Body Fat % = 1.20 × BMI + 0.23 × Age - 10.8 × sex - 5.4</strong><br>
+          (sex: male=1, female=0)
+        </p>
+      </div>
+    </div>
+
+    <!-- Educational Content -->
+    <div class="info-section">
+      <h2>Understanding Body Fat Percentage</h2>
+      <p>Body fat percentage is the proportion of fat mass to total body weight. Unlike BMI, which only considers weight and height, body fat percentage gives a better indication of body composition.</p>
+      
+      <h3>Healthy Body Fat Ranges</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin:20px 0;">
+        <div>
+          <h4>Men</h4>
+          <ul>
+            <li>Essential fat: 2-5%</li>
+            <li>Athletes: 6-13%</li>
+            <li>Fitness: 14-17%</li>
+            <li>Average: 18-24%</li>
+            <li>Above average: 25%+</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Women</h4>
+          <ul>
+            <li>Essential fat: 10-13%</li>
+            <li>Athletes: 14-20%</li>
+            <li>Fitness: 21-24%</li>
+            <li>Average: 25-31%</li>
+            <li>Above average: 32%+</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3>Limitations of This Calculator</h3>
+      <p>This calculator uses the Deurenberg equation, which is based on population averages. It may not be accurate for athletes, very muscular individuals, or older adults. For a more precise measurement, consider methods like DEXA scan, hydrostatic weighing, or skinfold calipers.</p>
+    </div>
+
+    <!-- Blog Teaser -->
+    <div class="blog-teaser">
+      <i class="fas fa-blog" style="font-size:3rem; color:#1b7e55; margin-bottom:15px;"></i>
+      <h3 style="font-size:2rem; margin-bottom:10px;">Visit Our Blog</h3>
+      <p style="margin-bottom:20px;">Expert articles on heart health, liver, joints, bones, muscle building, strength training, exercise and more.</p>
+      <a href="blog/index.html" style="background:#1b7e55; color:white; text-decoration:none; padding:12px 30px; border-radius:60px; font-weight:600; display:inline-block;">Browse Categories →</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-text">fitmeagain</div>
+      <p>Evidence-based health tools and wellness resources</p>
+      <p><i class="fas fa-copyright"></i> 2026 fitmeagain</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('calculateBtn').addEventListener('click', function() {
+      const bmi = parseFloat(document.getElementById('bmi').value) || 24.5;
+      const age = parseFloat(document.getElementById('age').value) || 35;
+      const isMale = document.querySelector('input[name="gender"]:checked').value === 'male';
+      const sex = isMale ? 1 : 0;
+      
+      // Deurenberg formula
+      let fat = 1.20 * bmi + 0.23 * age - 10.8 * sex - 5.4;
+      
+      // Clamp to reasonable range
+      fat = Math.min(45, Math.max(5, fat));
+      
+      document.getElementById('fatResult').innerHTML = fat.toFixed(1) + '% <small>estimated</small>';
+    });
+    
+    // Trigger initial calculation
+    document.getElementById('calculateBtn').click();
+  </script>
+</body>
+</html>
