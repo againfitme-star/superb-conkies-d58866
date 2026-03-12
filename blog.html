@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - fitmeagain</title>
+  <meta name="description" content="Health and wellness blog covering heart health, liver, joints, bones, muscle building, strength training, exercise and more.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #f4f9ff; color: #1a2f42; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    /* Navigation */
+    .navbar {
+      background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 0;
+      border-bottom: 2px solid #c5d9e8; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo-text { font-size: 2rem; font-weight: 700; color: #1a3f66; }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      text-decoration: none; color: #2b4b6e; font-weight: 600; padding: 5px 0;
+    }
+    .nav-links a:hover { color: #1b7e55; }
+    .nav-links a.active { color: #1b7e55; border-bottom: 3px solid #1b7e55; }
+    
+    /* Blog Categories Grid */
+    .blog-header { margin: 40px 0 20px; }
+    h1 { font-size: 2.5rem; color: #113d5c; border-left: 8px solid #1b7e55; padding-left: 25px; }
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin: 40px 0;
+    }
+    .category-card {
+      background: white; border-radius: 20px; padding: 30px; text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03); border: 1px solid #d0e2f0;
+      transition: transform 0.2s; text-decoration: none; color: inherit;
+    }
+    .category-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(27,126,85,0.1); }
+    .category-icon { font-size: 3rem; color: #1b7e55; margin-bottom: 15px; }
+    .category-title { font-size: 1.5rem; font-weight: 600; color: #1a3f66; margin-bottom: 10px; }
+    .category-desc { color: #5b6f82; font-size: 0.95rem; }
+    
+    /* Footer */
+    footer { background: #e2eefa; border-radius: 40px 40px 0 0; padding: 30px; margin-top: 50px; text-align: center; }
+    .footer-text { font-size: 1.5rem; font-weight: 700; color: #1a3f66; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-text">fitmeagain</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog/" class="active">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="blog-header">
+      <h1>fitmeagain Blog</h1>
+      <p style="font-size:1.2rem; margin-top:15px;">Expert articles on health, fitness, and wellness</p>
+    </div>
+
+    <div class="categories-grid">
+      <!-- Category Cards (all linked to separate pages) -->
+      <a href="heart.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-heart"></i></div>
+        <div class="category-title">Heart Health</div>
+        <div class="category-desc">Cardiovascular wellness, heart disease prevention, healthy lifestyle tips</div>
+      </a>
+      
+      <a href="liver.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-liver"></i></div>
+        <div class="category-title">Liver Health</div>
+        <div class="category-desc">Liver function, detoxification, fatty liver, healthy diet</div>
+      </a>
+      
+      <a href="joints.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-bone"></i></div>
+        <div class="category-title">Joints</div>
+        <div class="category-desc">Joint pain relief, arthritis, mobility, flexibility exercises</div>
+      </a>
+      
+      <a href="bones.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-bone"></i></div>
+        <div class="category-title">Bones</div>
+        <div class="category-desc">Bone density, osteoporosis, calcium, vitamin D, strength</div>
+      </a>
+      
+      <a href="muscle-building.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-dumbbell"></i></div>
+        <div class="category-title">Muscle Building</div>
+        <div class="category-desc">Hypertrophy, protein intake, workout plans, recovery</div>
+      </a>
+      
+      <a href="strength-training.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-person-lifting"></i></div>
+        <div class="category-title">Strength Training</div>
+        <div class="category-desc">Weight lifting, progressive overload, form, programming</div>
+      </a>
+      
+      <a href="exercise.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-person-walking"></i></div>
+        <div class="category-title">Exercise</div>
+        <div class="category-desc">General fitness, home workouts, cardio, routines</div>
+      </a>
+      
+      <a href="cardio.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-heart-pulse"></i></div>
+        <div class="category-title">Cardio</div>
+        <div class="category-desc">Running, cycling, HIIT, endurance, heart health</div>
+      </a>
+      
+      <a href="nutrition.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-apple-alt"></i></div>
+        <div class="category-title">Nutrition</div>
+        <div class="category-desc">Healthy eating, meal planning, macros, supplements</div>
+      </a>
+      
+      <a href="mental-health.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-brain"></i></div>
+        <div class="category-title">Mental Health</div>
+        <div class="category-desc">Stress management, mindfulness, sleep, well-being</div>
+      </a>
+      
+      <a href="respiratory.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-lungs"></i></div>
+        <div class="category-title">Respiratory</div>
+        <div class="category-desc">Lung health, breathing exercises, asthma, COPD</div>
+      </a>
+      
+      <a href="running.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-shoe-prints"></i></div>
+        <div class="category-title">Running</div>
+        <div class="category-desc">Training tips, injury prevention, marathon prep, gear</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-text">fitmeagain</div>
+      <p>Evidence-based health tools and wellness blog</p>
+      <p><i class="fas fa-copyright"></i> 2026 fitmeagain</p>
+    </div>
+  </footer>
+</body>
+</html>
