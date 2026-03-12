@@ -3,547 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fitmeagain · health calculators & blog</title>
-  <!-- Font Awesome 6 -->
+  <title>Health & Wellness Blog - fitmeagain</title>
+  <meta name="description" content="Expert articles on heart health, liver, joints, bones, muscle building, strength training, exercise, cardio, nutrition, mental health, respiratory, and running.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    body {
-      background: #f4f9ff;
-      color: #1a2f42;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #f5f9fc; color: #1e2f3e; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     
-    /* Navigation */
     .navbar {
-      background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      padding: 15px 0;
-      border-bottom: 2px solid #c5d9e8;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: white; border-bottom: 2px solid #d0deeb; padding: 10px 0; position: sticky; top: 0;
     }
-    .nav-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    
-    /* SIMPLE TEXT LOGO - no icon, no watermark */
-    .logo-text {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #1a3f66;
-      letter-spacing: -0.3px;
-    }
-    
-    /* Navigation tabs - simple text */
-    .nav-links {
-      display: flex;
-      gap: 25px;
-    }
+    .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo-text { font-size: 2rem; font-weight: 700; color: #1a3f66; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav-links a {
-      text-decoration: none;
-      color: #2b4b6e;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 5px 0;
-      transition: 0.2s;
+      text-decoration: none; color: #2b4b6e; font-weight: 600; padding: 8px 16px; border-radius: 30px;
+      background: #ecf3fa; font-size: 0.95rem;
     }
-    .nav-links a:hover {
-      color: #1b7e55;
-    }
-    .nav-links a.active {
-      color: #1b7e55;
-      border-bottom: 3px solid #1b7e55;
-    }
+    .nav-links a:hover { background: #d3e4f2; }
+    .nav-links a.active { background: #1b7e55; color: white; }
     
-    /* Page visibility */
-    .page {
-      display: none;
-      padding: 30px 0 50px;
-    }
-    .page.active-page {
-      display: block;
-    }
+    h1 { font-size: 2.5rem; color: #113d5c; border-left: 8px solid #1b7e55; padding-left: 25px; margin: 40px 0 20px; }
+    .subhead { color: #2b4b6e; font-size: 1.2rem; margin: 15px 0 30px; }
     
-    /* Typography */
-    h1 {
-      font-size: 2.4rem;
-      color: #113d5c;
-      margin: 20px 0 15px;
-      border-left: 8px solid #1b7e55;
-      padding-left: 25px;
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin: 40px 0;
     }
-    h2 {
-      font-size: 1.8rem;
-      color: #1b4d6e;
-      margin-bottom: 20px;
+    .category-card {
+      background: white; border-radius: 20px; padding: 30px; text-align: center;
+      border: 1px solid #d0e2f0; transition: 0.2s; text-decoration: none; color: inherit; display: block;
     }
-    
-    /* Calculator layout */
-    .calc-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin: 30px 0;
-    }
-    @media (max-width: 700px) {
-      .calc-grid { grid-template-columns: 1fr; }
-    }
-    
-    .input-col, .result-col {
-      background: white;
-      border-radius: 30px;
-      padding: 32px;
-      box-shadow: 0 12px 30px rgba(0,45,70,0.08);
-      border: 1px solid #cde0ef;
-    }
-    
-    /* Form elements */
-    .input-group {
-      margin-bottom: 22px;
-    }
-    .input-group label {
-      display: block;
-      font-weight: 600;
-      color: #1d4460;
-      margin-bottom: 8px;
-    }
-    .input-group input, .input-group select {
-      width: 100%;
-      padding: 14px 20px;
-      border: 1.5px solid #c2d7ec;
-      border-radius: 60px;
-      font-size: 1rem;
-      background: #f6faff;
-    }
-    .input-group input:focus {
+    .category-card:hover {
+      transform: translateY(-5px); box-shadow: 0 15px 30px rgba(27,126,85,0.1);
       border-color: #1b7e55;
-      outline: none;
-      box-shadow: 0 0 0 4px #1b7e5520;
     }
+    .category-icon { font-size: 3rem; color: #1b7e55; margin-bottom: 15px; }
+    .category-title { font-size: 1.5rem; font-weight: 600; color: #1a3f66; margin-bottom: 10px; }
+    .category-desc { color: #5b6f82; font-size: 0.95rem; }
     
-    .btn-calc {
-      background: #1b7e55;
-      color: white;
-      border: none;
-      border-radius: 60px;
-      padding: 16px 28px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      width: 100%;
-      cursor: pointer;
-      margin: 15px 0;
-      transition: 0.2s;
-    }
-    .btn-calc:hover {
-      background: #136342;
-    }
-    
-    .result-box {
-      background: #e0f2e9;
-      border-radius: 30px;
-      padding: 25px;
-      font-size: 2.2rem;
-      font-weight: 700;
-      text-align: center;
-      color: #1b5e3a;
-    }
-    .result-box small {
-      font-size: 1rem;
-      font-weight: 400;
-      display: block;
-      color: #266e48;
-    }
-    
-    /* Tables and info */
-    .formula-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
-    .formula-table th {
-      background: #e3effa;
-      padding: 14px;
-      text-align: left;
-      font-weight: 600;
-    }
-    .formula-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #d0e2f0;
-    }
-    .info-section {
-      background: #e7f2fa;
-      border-radius: 32px;
-      padding: 32px;
-      margin: 40px 0;
-    }
-    
-    /* Blog styles */
-    .blog-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 30px 0;
-    }
-    .topic-pill {
-      background: white;
-      padding: 14px 28px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      border: 1px solid #b7d1e5;
-      color: #1d4e75;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .topic-pill i {
-      margin-right: 8px;
-      color: #1b7e55;
-    }
-    .blog-placeholder {
-      background: white;
-      border-radius: 40px;
-      padding: 70px 40px;
-      text-align: center;
-      border: 2px dashed #b0cce0;
-    }
-    
-    /* Footer */
     footer {
-      background: #e2eefa;
-      border-radius: 40px 40px 0 0;
-      padding: 30px;
-      margin-top: 50px;
-      text-align: center;
-    }
-    .footer-text {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1a3f66;
-      margin-bottom: 15px;
+      background: #e2eefa; border-radius: 40px 40px 0 0; padding: 30px; margin-top: 50px; text-align: center;
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <div class="container nav-flex">
-      <!-- SIMPLE TEXT LOGO - exactly as in your image -->
       <div class="logo-text">fitmeagain</div>
-      
-      <!-- Navigation tabs - exactly as in your image -->
-      <div class="nav-links" id="tabNav">
-        <a href="#" data-page="ideal" class="active">Ideal Weight</a>
-        <a href="#" data-page="bmi">BMI</a>
-        <a href="#" data-page="bodyfat">Body Fat</a>
-        <a href="#" data-page="calorie">Calorie</a>
-        <a href="#" data-page="blog">Blog</a>
+      <div class="nav-links">
+        <a href="../ideal-weight.html">Ideal Weight</a>
+        <a href="../bmi.html">BMI</a>
+        <a href="../body-fat.html">Body Fat</a>
+        <a href="../calorie.html">Calorie</a>
+        <a href="index.html" class="active">Blog</a>
       </div>
     </div>
   </nav>
 
   <main class="container">
-    <!-- IDEAL WEIGHT PAGE -->
-    <section id="ideal-page" class="page active-page">
-      <h1>Ideal Weight Calculator</h1>
-      <p style="font-size:1.2rem; margin-bottom:25px;">Compare Robinson, Miller, Devine, Hamwi formulas + healthy BMI range</p>
-      
-      <div class="calc-grid">
-        <div class="input-col">
-          <h2>Your Details</h2>
-          <div style="display:flex; gap: 30px; margin-bottom:20px;">
-            <label><input type="radio" name="idealGender" value="male" checked> <strong>Male</strong></label>
-            <label><input type="radio" name="idealGender" value="female"> <strong>Female</strong></label>
-          </div>
-          <div class="input-group">
-            <label>Age (2-80 years)</label>
-            <input type="number" id="idealAge" value="35" min="2" max="80">
-          </div>
-          <div class="input-group">
-            <label>Height (cm)</label>
-            <input type="number" id="idealHt" value="175" min="100" max="250">
-          </div>
-          <button class="btn-calc" id="calcIdealBtn">Calculate Ideal Weight</button>
-          <div class="result-box" id="idealResultMain">—</div>
-        </div>
-        
-        <div class="result-col">
-          <h2>Results Comparison</h2>
-          <table class="formula-table">
-            <tr><th>Formula</th><th>Ideal Weight (kg)</th><th>Ideal Weight (lbs)</th></tr>
-            <tr><td>Robinson (1983)</td><td id="robKg">72.6</td><td id="robLbs">160.1</td></tr>
-            <tr><td>Miller (1983)</td><td id="milKg">71.5</td><td id="milLbs">157.6</td></tr>
-            <tr><td>Devine (1974)</td><td id="devKg">75.0</td><td id="devLbs">165.3</td></tr>
-            <tr><td>Hamwi (1964)</td><td id="hamKg">77.3</td><td id="hamLbs">170.4</td></tr>
-            <tr style="background:#e0f2e9;"><td><strong>Healthy BMI Range</strong></td><td colspan="2" id="bmiRange">59.9 – 81.0 kg</td></tr>
-          </table>
-        </div>
-      </div>
-      
-      <div class="info-section">
-        <h2>Understanding Ideal Weight</h2>
-        <p>Ideal body weight (IBW) was originally developed for medical dosage calculations. Today, these formulas help provide general guidelines, but they don't account for muscle mass, body fat percentage, or individual variations.</p>
-        
-        <h3 style="margin:25px 0 15px;">The Four Formulas</h3>
-        <ul style="margin-left:25px;">
-          <li><strong>Robinson (1983):</strong> Male: 52kg + 1.9kg/inch over 5ft | Female: 49kg + 1.7kg/inch over 5ft</li>
-          <li><strong>Miller (1983):</strong> Male: 56.2kg + 1.41kg/inch over 5ft | Female: 53.1kg + 1.36kg/inch over 5ft</li>
-          <li><strong>Devine (1974):</strong> Male: 50kg + 2.3kg/inch over 5ft | Female: 45.5kg + 2.3kg/inch over 5ft</li>
-          <li><strong>Hamwi (1964):</strong> Male: 48kg + 2.7kg/inch over 5ft | Female: 45.5kg + 2.2kg/inch over 5ft</li>
-        </ul>
-      </div>
-    </section>
+    <h1>Health & Wellness Blog</h1>
+    <div class="subhead">Browse articles by category</div>
 
-    <!-- BMI PAGE -->
-    <section id="bmi-page" class="page">
-      <h1>BMI Calculator</h1>
-      <div class="calc-grid">
-        <div class="input-col">
-          <h2>Your Measurements</h2>
-          <div class="input-group">
-            <label>Weight (kg)</label>
-            <input type="number" id="bmiWeight" value="74" step="0.1">
-          </div>
-          <div class="input-group">
-            <label>Height (cm)</label>
-            <input type="number" id="bmiHeight" value="175">
-          </div>
-          <button class="btn-calc" id="calcBmiBtn">Calculate BMI</button>
-          <div class="result-box" id="bmiResult">24.2 <small>normal weight</small></div>
-        </div>
-        <div class="result-col">
-          <h2>BMI Categories</h2>
-          <ul style="list-style:none; font-size:1.2rem;">
-            <li><i class="fas fa-circle" style="color:#3498db;"></i> Underweight: < 18.5</li>
-            <li><i class="fas fa-circle" style="color:#2ecc71;"></i> Normal: 18.5 – 24.9</li>
-            <li><i class="fas fa-circle" style="color:#f39c12;"></i> Overweight: 25 – 29.9</li>
-            <li><i class="fas fa-circle" style="color:#e67e22;"></i> Obesity: ≥ 30</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- BODY FAT PAGE -->
-    <section id="bodyfat-page" class="page">
-      <h1>Body Fat Estimator</h1>
-      <div class="calc-grid">
-        <div class="input-col">
-          <h2>Your Details</h2>
-          <div style="display:flex; gap:25px; margin-bottom:20px;">
-            <label><input type="radio" name="fatGender" value="male" checked> Male</label>
-            <label><input type="radio" name="fatGender" value="female"> Female</label>
-          </div>
-          <div class="input-group">
-            <label>BMI</label>
-            <input type="number" id="fatBmi" step="0.1" value="24.5">
-          </div>
-          <div class="input-group">
-            <label>Age (years)</label>
-            <input type="number" id="fatAge" value="35">
-          </div>
-          <button class="btn-calc" id="calcFatBtn">Estimate Body Fat</button>
-          <div class="result-box" id="fatResult">21.2% <small>estimated</small></div>
-        </div>
-        <div class="result-col">
-          <h2>Deurenberg Formula</h2>
-          <p>Body Fat % = 1.20 × BMI + 0.23 × Age - 10.8 × sex - 5.4</p>
-          <p>(sex: male=1, female=0)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CALORIE PAGE - as shown in your screenshot -->
-    <section id="calorie-page" class="page">
-      <h1>Calorie Calculator</h1>
-      <div class="calc-grid">
-        <div class="input-col">
-          <h2>Daily Energy Needs</h2>
-          <div style="display:flex; gap:25px; margin-bottom:15px;">
-            <label><input type="radio" name="calGender" value="male" checked> Male</label>
-            <label><input type="radio" name="calGender" value="female"> Female</label>
-          </div>
-          <div class="input-group"><label>Weight (kg)</label><input type="number" id="calWeight" value="74"></div>
-          <div class="input-group"><label>Height (cm)</label><input type="number" id="calHeight" value="175"></div>
-          <div class="input-group"><label>Age</label><input type="number" id="calAge" value="35"></div>
-          <div class="input-group">
-            <label>Activity Level</label>
-            <select id="calActivity">
-              <option value="1.2">Sedentary (little exercise)</option>
-              <option value="1.375">Light (1-3 days/week)</option>
-              <option value="1.55" selected>Moderate (3-5 days/week)</option>
-              <option value="1.725">Active (6-7 days/week)</option>
-              <option value="1.9">Very active (physical job)</option>
-            </select>
-          </div>
-          <button class="btn-calc" id="calcCalBtn">Calculate Calories</button>
-          <div class="result-box" id="calResult">2,630 <small>kcal/day</small></div>
-        </div>
-        <div class="result-col">
-          <h2>Mifflin-St Jeor Equation</h2>
-          <p><strong>Men:</strong> BMR = 10W + 6.25H - 5A + 5</p>
-          <p><strong>Women:</strong> BMR = 10W + 6.25H - 5A - 161</p>
-          <p style="margin-top:15px;">TDEE = BMR × Activity Factor</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- BLOG PAGE with all sections -->
-    <section id="blog-page" class="page">
-      <h1>fitmeagain Blog</h1>
-      
-      <div class="blog-topics">
-        <span class="topic-pill"><i class="fas fa-heart"></i> Heart</span>
-        <span class="topic-pill"><i class="fas fa-liver"></i> Liver</span>
-        <span class="topic-pill"><i class="fas fa-bone"></i> Joints</span>
-        <span class="topic-pill"><i class="fas fa-bone"></i> Bones</span>
-        <span class="topic-pill"><i class="fas fa-dumbbell"></i> Muscle Building</span>
-        <span class="topic-pill"><i class="fas fa-person-lifting"></i> Strength Training</span>
-        <span class="topic-pill"><i class="fas fa-person-walking"></i> Exercise</span>
-        <span class="topic-pill"><i class="fas fa-heart-pulse"></i> Cardio</span>
-        <span class="topic-pill"><i class="fas fa-apple-alt"></i> Nutrition</span>
-        <span class="topic-pill"><i class="fas fa-brain"></i> Mental Health</span>
-        <span class="topic-pill"><i class="fas fa-lungs"></i> Respiratory</span>
-        <span class="topic-pill"><i class="fas fa-shoe-prints"></i> Running</span>
-      </div>
-      
-      <div class="blog-placeholder">
-        <i class="fas fa-pen-fancy" style="font-size:5rem; color:#1b7e55; margin-bottom:20px;"></i>
-        <h2 style="font-size:2.5rem; margin:15px 0; color:#1a3f66;">Blog Coming Soon!</h2>
-        <p style="font-size:1.3rem; max-width:600px; margin:0 auto; color:#3d6077;">
-          Articles on heart, liver, joints, bones, muscle building, strength training, exercise and more will appear here.
-        </p>
-      </div>
-    </section>
+    <div class="categories-grid">
+      <a href="heart.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-heart"></i></div>
+        <div class="category-title">Heart Health</div>
+        <div class="category-desc">Cardiovascular wellness, heart disease prevention</div>
+      </a>
+      <a href="liver.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-liver"></i></div>
+        <div class="category-title">Liver Health</div>
+        <div class="category-desc">Liver function, detoxification, fatty liver</div>
+      </a>
+      <a href="joints.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-bone"></i></div>
+        <div class="category-title">Joint Health</div>
+        <div class="category-desc">Joint pain relief, arthritis, mobility</div>
+      </a>
+      <a href="bones.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-bone"></i></div>
+        <div class="category-title">Bone Health</div>
+        <div class="category-desc">Bone density, osteoporosis, calcium</div>
+      </a>
+      <a href="musclebuilding.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-dumbbell"></i></div>
+        <div class="category-title">Muscle Building</div>
+        <div class="category-desc">Hypertrophy, protein intake, workout plans</div>
+      </a>
+      <a href="strength-training.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-person-lifting"></i></div>
+        <div class="category-title">Strength Training</div>
+        <div class="category-desc">Weight lifting, progressive overload, form</div>
+      </a>
+      <a href="exercise.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-person-walking"></i></div>
+        <div class="category-title">Exercise</div>
+        <div class="category-desc">General fitness, home workouts, routines</div>
+      </a>
+      <a href="cardio.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-heart-pulse"></i></div>
+        <div class="category-title">Cardio</div>
+        <div class="category-desc">Running, cycling, HIIT, endurance</div>
+      </a>
+      <a href="nutrition.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-apple-alt"></i></div>
+        <div class="category-title">Nutrition</div>
+        <div class="category-desc">Healthy eating, meal planning, macros</div>
+      </a>
+      <a href="mentalhealth.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-brain"></i></div>
+        <div class="category-title">Mental Health</div>
+        <div class="category-desc">Stress management, mindfulness, sleep</div>
+      </a>
+      <a href="respiratory.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-lungs"></i></div>
+        <div class="category-title">Respiratory</div>
+        <div class="category-desc">Lung health, breathing exercises, asthma</div>
+      </a>
+      <a href="running.html" class="category-card">
+        <div class="category-icon"><i class="fas fa-shoe-prints"></i></div>
+        <div class="category-title">Running</div>
+        <div class="category-desc">Training tips, injury prevention, marathon</div>
+      </a>
+    </div>
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-text">fitmeagain</div>
-      <p>Evidence-based health tools and calculators</p>
-      <p><i class="fas fa-copyright"></i> 2026 fitmeagain. All rights reserved.</p>
+      <p>Evidence-based health tools and wellness blog</p>
+      <p><i class="fas fa-copyright"></i> 2026 fitmeagain</p>
     </div>
   </footer>
-
-  <script>
-    (function() {
-      // Tab switching
-      const pages = {
-        ideal: document.getElementById('ideal-page'),
-        bmi: document.getElementById('bmi-page'),
-        bodyfat: document.getElementById('bodyfat-page'),
-        calorie: document.getElementById('calorie-page'),
-        blog: document.getElementById('blog-page')
-      };
-      
-      const navLinks = document.querySelectorAll('.nav-links a');
-      
-      function showPage(pageId) {
-        Object.values(pages).forEach(p => p.classList.remove('active-page'));
-        if (pages[pageId]) pages[pageId].classList.add('active-page');
-        
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.dataset.page === pageId) link.classList.add('active');
-        });
-      }
-      
-      navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          showPage(link.dataset.page);
-        });
-      });
-      
-      // IDEAL WEIGHT CALCULATOR
-      function computeIdeal() {
-        const isMale = document.querySelector('input[name="idealGender"]:checked').value === 'male';
-        let htCm = parseFloat(document.getElementById('idealHt').value) || 175;
-        let htIn = htCm / 2.54;
-        let over5 = Math.max(0, htIn - 60);
-        
-        let rob, mill, dev, ham;
-        if (isMale) {
-          rob = 52 + 1.9 * over5;
-          mill = 56.2 + 1.41 * over5;
-          dev = 50 + 2.3 * over5;
-          ham = 48 + 2.7 * over5;
-        } else {
-          rob = 49 + 1.7 * over5;
-          mill = 53.1 + 1.36 * over5;
-          dev = 45.5 + 2.3 * over5;
-          ham = 45.5 + 2.2 * over5;
-        }
-        
-        let heightM = htCm / 100;
-        let bmiLow = (18.5 * heightM * heightM).toFixed(1);
-        let bmiHigh = (25 * heightM * heightM).toFixed(1);
-        
-        document.getElementById('robKg').innerText = rob.toFixed(1);
-        document.getElementById('robLbs').innerText = (rob * 2.20462).toFixed(1);
-        document.getElementById('milKg').innerText = mill.toFixed(1);
-        document.getElementById('milLbs').innerText = (mill * 2.20462).toFixed(1);
-        document.getElementById('devKg').innerText = dev.toFixed(1);
-        document.getElementById('devLbs').innerText = (dev * 2.20462).toFixed(1);
-        document.getElementById('hamKg').innerText = ham.toFixed(1);
-        document.getElementById('hamLbs').innerText = (ham * 2.20462).toFixed(1);
-        document.getElementById('bmiRange').innerText = bmiLow + ' – ' + bmiHigh + ' kg';
-        document.getElementById('idealResultMain').innerHTML = ((rob+mill+dev+ham)/4).toFixed(1) + ' kg <small>average</small>';
-      }
-      
-      document.getElementById('calcIdealBtn').addEventListener('click', computeIdeal);
-      computeIdeal();
-      
-      // BMI CALCULATOR
-      document.getElementById('calcBmiBtn').addEventListener('click', function() {
-        let w = parseFloat(document.getElementById('bmiWeight').value);
-        let h = parseFloat(document.getElementById('bmiHeight').value) / 100;
-        if (w > 0 && h > 0) {
-          let bmi = w / (h * h);
-          let cat = bmi < 18.5 ? 'underweight' : 
-                    bmi < 25 ? 'normal' : 
-                    bmi < 30 ? 'overweight' : 'obesity';
-          document.getElementById('bmiResult').innerHTML = bmi.toFixed(1) + ' <small>' + cat + '</small>';
-        }
-      });
-      
-      // BODY FAT CALCULATOR
-      document.getElementById('calcFatBtn').addEventListener('click', function() {
-        let bmi = parseFloat(document.getElementById('fatBmi').value) || 24.5;
-        let age = parseFloat(document.getElementById('fatAge').value) || 35;
-        let isMale = document.querySelector('input[name="fatGender"]:checked').value === 'male';
-        let sex = isMale ? 1 : 0;
-        let fat = 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4;
-        document.getElementById('fatResult').innerHTML = fat.toFixed(1) + '% <small>estimated</small>';
-      });
-      
-      // CALORIE CALCULATOR
-      document.getElementById('calcCalBtn').addEventListener('click', function() {
-        let isMale = document.querySelector('input[name="calGender"]:checked').value === 'male';
-        let w = parseFloat(document.getElementById('calWeight').value) || 74;
-        let h = parseFloat(document.getElementById('calHeight').value) || 175;
-        let a = parseFloat(document.getElementById('calAge').value) || 35;
-        let act = parseFloat(document.getElementById('calActivity').value) || 1.55;
-        
-        let bmr = isMale ? (10*w + 6.25*h - 5*a + 5) : (10*w + 6.25*h - 5*a - 161);
-        document.getElementById('calResult').innerHTML = Math.round(bmr * act) + ' <small>kcal/day</small>';
-      });
-      
-      // Trigger initial calculations
-      document.getElementById('calcBmiBtn').click();
-      document.getElementById('calcFatBtn').click();
-      document.getElementById('calcCalBtn').click();
-    })();
-  </script>
 </body>
 </html>
